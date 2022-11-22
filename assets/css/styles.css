@@ -4,6 +4,8 @@
     --primary-color: #0d0d0d;
     --secondary-color: #9000FF;
     --secondary-color-darker: #58009D;
+    --good-color: #16A085;
+    --bad-color: #EA3C3C;
 }
 
 * {
@@ -43,7 +45,8 @@ form input {
 }
 
 form input:focus {
-    outline: 1px solid var(--secondary-color);
+    outline: 1.5px solid var(--secondary-color);
+    border: none;
 }
 
 form button {
@@ -81,7 +84,20 @@ form button:hover {
     line-height: 1.2em;
 }
 
-.result {
-    
+.bad-result, .good-result {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.bad-result {
+    background: var(--bad-color);
+}
+
+.good-result {
+    background: var(--good-color);
 }
 

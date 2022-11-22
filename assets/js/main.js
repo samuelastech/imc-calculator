@@ -2,44 +2,60 @@ function imc() {
     const form = document.querySelector('.form');
     const result = document.querySelector('.result');
 
-    function formReceive(event) {
-        event.preventDefault();
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        const weight = Number(form.querySelector('.weight').value);
-        const height = Number(form.querySelector('.height').value);
+        const weight = Number(e.target.querySelector('.weight').value);
+        const height = Number(e.target.querySelector('.height').value);
 
-        const imc = weight / (height**2) || 0;
-        classification = '';
-
-        if (imc < 18.5) {
-            classification = 'Magreza';
-        } 
-        else if (imc >= 18.5 && imc <= 24.9) {
-            classification = 'Normal';
+        if (!weight) {
+            setResult('Peso Inválido.', false);
+            return;
         }
-        else if (imc >= 25 && imc <= 29.9) {
-            classification = 'Sobrepeso';
-        }
-        else if (imc >= 30 && imc <= 34.9) {
-            classification = 'Obesidade GRAU I';
-        }
-        else if (imc >= 35 && imc <= 39.9) {
-            classification = 'Obesidade GRAU II';
-        }
-        else {
-            classification = 'Obesidade GRAU III';
+        if (!height) {
+            setResult('Altura Inválida.', false);
+            return;
         }
 
-        result.innerHTML = `<p>
-        Peso: ${weight} 
-        Altura: ${height.toFixed(2)}
-        IMC: ${imc.toFixed(2)} (${classification})
-        </p>`;
+        const imc = getIMC(weight, height);
+        const levelIMC = getClassification(imc);
 
+        setResult(`IMC: ${imc} (${levelIMC})`, true);
+
+    });
+
+}
+
+function getIMC(weight, height) {
+    return (weight / height ** 2).toFixed(2);
+}
+
+function getClassification(imc) {
+    const level = ['Magreza', 'Normal', 'Sobrepeso', 'Obesidade GRAU I', 'Obesidade GRAU II', 'Obesidade GRAU III'];
+
+    if (imc >= 39.9) return level[5];
+    if (imc >= 34.9) return level[4];
+    if (imc >= 29.9) return level[3];
+    if (imc >= 24.9) return level[2];
+    if (imc >= 18.5) return level[1];
+    if (imc < 18.5) return level[0];
+}
+
+function setResult(msg, isValid) {
+    const result = document.querySelector('.result');
+    result.innerHTML = '';
+    
+    const p = document.createElement('p');
+    p.innerHTML = msg;
+
+    if (isValid) {
+        p.classList.add('good-result');
     }
-
-    form.addEventListener('submit', formReceive);
-
+    else {
+        p.classList.add('bad-result');
+    }
+    
+    result.appendChild(p);
 }
 
 imc();
