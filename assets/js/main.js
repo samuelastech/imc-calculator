@@ -8,10 +8,16 @@ function imc() {
         const weight = Number(e.target.querySelector('.weight').value);
         const height = Number(e.target.querySelector('.height').value);
 
+        if (!weight && !height){
+            setResult('Você precisa preencher os campos.', false);
+            return;
+        }
+        
         if (!weight) {
             setResult('Peso Inválido.', false);
             return;
         }
+
         if (!height) {
             setResult('Altura Inválida.', false);
             return;
