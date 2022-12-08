@@ -46,9 +46,12 @@
             <h1>Calcule seu IMC</h1>
             <form class="form" action="/">
                 <label for="weight">Peso (ex.: 69.2)</label>
-                <input class="weight" type="text" placeholder="Quilos">
+                <input class="weight" type="text" placeholder="Quilos" required oninvalid="this.setCustomValidity
+                ('Adicione seu peso.')" oninput="this.setCustomValidity('')">
+
                 <label for="height">Altura (ex.: 1.70)</label>
-                <input class="height" type="text" placeholder="Metros">
+                <input class="height" type="text" placeholder="Metros" required required oninvalid="this.setCustomValidity ('Adicione sua altura.')" oninput="this.setCustomValidity('')">
+
                 <button>Calcular</button>
             </form>
         </div>

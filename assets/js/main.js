@@ -8,20 +8,10 @@ function imc() {
         const weight = Number(e.target.querySelector('.weight').value);
         const height = Number(e.target.querySelector('.height').value);
 
-        if (!weight) {
-            setResult('Peso Inválido.', false);
-            return;
-        }
-        if (!height) {
-            setResult('Altura Inválida.', false);
-            return;
-        }
-
         const imc = getIMC(weight, height);
         const levelIMC = getClassification(imc);
 
         setResult(`IMC: ${imc} (${levelIMC})`, true);
-
     });
 
 }
